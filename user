@@ -1,0 +1,15 @@
+groupadd -g 1000 bat22a
+for i in `cat /var/tmp/useradd`
+do
+useradd -g 1000 -M $i
+
+echo "$i"|passwd --stdin $i
+
+mkdir /home/$i
+
+done
+ for j in `cat /var/tmp/home`
+do
+chown $i:bat22a $j
+cp /etc/skel.* $j
+done 
